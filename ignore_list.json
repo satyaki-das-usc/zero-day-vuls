@@ -1,0 +1,7 @@
+{
+  "ignore_list": [
+    "v3_pci.c",
+    "v3_pcia.c",
+    "x86_64-gcc.c"
+  ]
+}
