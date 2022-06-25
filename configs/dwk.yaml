@@ -8,15 +8,7 @@ split_token: false
 
 # data keys
 data_folder: "data"
-repo_folder: "git-repo"
-src_folder: "just-src-files"
-fixed_header_folder: "fixed-src-files"
-ignored_files_folder: "ignored-files"
-select_results_path: "select_results.json"
-results_path: "results.json"
-ground_truth_path: "ground_truth.json"
-vul_slices_path: "vul_slices_results.json"
-ignore_list_path: "ignore_list.json"
+data_format_filename: "data_format.json"
 desired_output: 1
 save_every_epoch: 1
 val_every_epoch: 1

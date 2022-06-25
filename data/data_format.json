@@ -1,0 +1,15 @@
+{
+    "folders" : {
+        "repo_folder": "git-repo",
+        "src_folder": "just-src-files",
+        "fixed_header_folder": "fixed-src-files",
+        "ignored_files_folder": "ignored-files"
+    },
+    "files" : {
+        "select_results_path": "select_results.json",
+        "results_path": "results.json",
+        "ground_truth_path": "ground_truth.json",
+        "vul_slices_path": "vul_slices_results.json",
+        "ignore_list_path": "ignore_list.json"
+    }
+}
