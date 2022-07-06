@@ -37,6 +37,7 @@ def main():
     for filename in results:
         print(f"File: {filename}:")
         for XFG, label, output in results[filename]:
+            XFG.sort()
             if label == 1:
                 total_cnt += 1
                 if label == output:

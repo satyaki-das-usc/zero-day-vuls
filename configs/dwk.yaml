@@ -18,8 +18,8 @@ progress_bar_refresh_rate: 1
 model_data_folder: "/home/satyaki/luka/DeepWukongCopy/data"
 
 dataset:
-  cve_id: CVE-2021-21148
-  project_name: chromium_bug_1177341
+  cve_id: CVE-2021-21220
+  project_name: chromium_bug_1196683
   token:
     max_parts: 16
     is_wrapped: false

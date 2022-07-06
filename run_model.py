@@ -23,6 +23,7 @@ def main():
     
     MODEL_DATA_FOLDER = config.model_data_folder
     MODEL_CVE_DATA_FOLDER = os.path.join(MODEL_DATA_FOLDER, config.dataset.cve_id)
+    DST_W2V_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "w2v.wv")
     ALL_JSON_FILE_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "all.json")
     RESULTS_JSON_FILE_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "results.json")
     DONE_TXT_FILE_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "done.txt")
@@ -30,6 +31,17 @@ def main():
     CSV_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "csv")
     XFG_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "XFG")
     SOURCE_CODE_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "source-code")
+
+    folders = [MODEL_CVE_DATA_FOLDER, SOURCE_CODE_PATH]
+
+    for foldername in folders:
+        if not os.path.isdir(foldername):
+            os.mkdir(foldername)
+    
+    if not os.path.isfile(DST_W2V_PATH):
+        SRC_W2V_PATH  = os.path.join(MODEL_CVE_DATA_FOLDER.replace(config.dataset.cve_id, "CWE119"), "w2v.wv")
+        shutil.copyfile(SRC_W2V_PATH, DST_W2V_PATH)
+
 
     files = [ALL_JSON_FILE_PATH, RESULTS_JSON_FILE_PATH, DONE_TXT_FILE_PATH]
 
