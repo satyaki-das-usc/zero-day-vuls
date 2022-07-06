@@ -10,6 +10,7 @@
         "results_path": "results.json",
         "ground_truth_path": "ground_truth.json",
         "vul_slices_path": "vul_slices_results.json",
-        "ignore_list_path": "ignore_list.json"
-    }
+        "stats_path": "stats.txt"
+    },
+    "ignore_list_path": "ignore_list.json"
 }

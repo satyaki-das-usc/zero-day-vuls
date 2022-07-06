@@ -11,17 +11,22 @@ def main():
     
     CVE_PATH = os.path.join(config.data_folder, config.dataset.cve_id)
     PROJ_PATH = os.path.join(CVE_PATH, config.dataset.project_name)
-    FIXED_HEADER_FOLDER = os.path.join(PROJ_PATH, config.fixed_header_folder)
-    GROUND_TRUTH_PATH = os.path.join(PROJ_PATH, config.ground_truth_path)
-    RESULTS_PATH = os.path.join(PROJ_PATH, config.results_path)
-    SELECT_RESULTS_PATH = os.path.join(PROJ_PATH, config.select_results_path)
+    DATA_FORMAT_FILENAME = os.path.join(config.data_folder, config.data_format_filename)
+
+    with open(DATA_FORMAT_FILENAME, "r") as f:
+        data_format = json.load(f)
+    
+    FIXED_HEADER_FOLDER = os.path.join(PROJ_PATH, data_format["folders"]["fixed_header_folder"])
+    GROUND_TRUTH_PATH = os.path.join(PROJ_PATH, data_format["files"]["ground_truth_path"])
+    RESULTS_PATH = os.path.join(PROJ_PATH, data_format["files"]["results_path"])
+    SELECT_RESULTS_PATH = os.path.join(PROJ_PATH, data_format["files"]["select_results_path"])
     
     MODEL_DATA_FOLDER = config.model_data_folder
     MODEL_CVE_DATA_FOLDER = os.path.join(MODEL_DATA_FOLDER, config.dataset.cve_id)
     ALL_JSON_FILE_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "all.json")
     RESULTS_JSON_FILE_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "results.json")
     DONE_TXT_FILE_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "done.txt")
-    MODEL_GROUND_TRUTH_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, config.ground_truth_path)
+    MODEL_GROUND_TRUTH_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, data_format["files"]["ground_truth_path"])
     CSV_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "csv")
     XFG_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "XFG")
     SOURCE_CODE_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "source-code")
@@ -65,7 +70,7 @@ def main():
     # print(f"pushd {model_folder_path}")
     # print(evaluate_str)
 
-    MODEL_SELECT_RESULTS_PATH = os.path.join(model_folder_path, "select_results.json")
+    MODEL_SELECT_RESULTS_PATH = os.path.join(model_folder_path, data_format["files"]["select_results_path"])
 
     shutil.copyfile(RESULTS_JSON_FILE_PATH, RESULTS_PATH)
     shutil.copyfile(MODEL_SELECT_RESULTS_PATH, SELECT_RESULTS_PATH)

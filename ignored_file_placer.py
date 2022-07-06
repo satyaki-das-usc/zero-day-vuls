@@ -11,9 +11,14 @@ def main():
     
     CVE_PATH = os.path.join(config.data_folder, config.dataset.cve_id)
     PROJ_PATH = os.path.join(CVE_PATH, config.dataset.project_name)
-    FIXED_HEADER_FOLDER = os.path.join(PROJ_PATH, config.fixed_header_folder)
-    IGNORED_FILES_FOLDER = os.path.join(PROJ_PATH, config.ignored_files_folder)
-    IGNORE_LIST_PATH = os.path.join(PROJ_PATH, config.ignore_list_path)
+    DATA_FORMAT_FILENAME = os.path.join(config.data_folder, config.data_format_filename)
+
+    with open(DATA_FORMAT_FILENAME, "r") as f:
+        data_format = json.load(f)
+    
+    FIXED_HEADER_FOLDER = os.path.join(PROJ_PATH, data_format["folders"]["fixed_header_folder"])
+    IGNORED_FILES_FOLDER = os.path.join(PROJ_PATH, data_format["folders"]["ignored_files_folder"])
+    IGNORE_LIST_PATH = os.path.join(PROJ_PATH, data_format["ignore_list_path"])
     
     ignore_list = dict()
     with open(IGNORE_LIST_PATH, "r") as f:

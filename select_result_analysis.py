@@ -11,14 +11,19 @@ def main():
 
     CVE_PATH = os.path.join(config.data_folder, config.dataset.cve_id)
     PROJ_PATH = os.path.join(CVE_PATH, config.dataset.project_name)
-    RESULTS_PATH = os.path.join(PROJ_PATH, config.results_path)
-    SELECT_RESULTS_PATH = os.path.join(PROJ_PATH, config.select_results_path)
+    DATA_FORMAT_FILENAME = os.path.join(config.data_folder, config.data_format_filename)
+
+    with open(DATA_FORMAT_FILENAME, "r") as f:
+        data_format = json.load(f)
+    
+    RESULTS_PATH = os.path.join(PROJ_PATH, data_format["files"]["results_path"])
+    SELECT_RESULTS_PATH = os.path.join(PROJ_PATH, data_format["files"]["select_results_path"])
     
     MODEL_CVE_DATA_FOLDER = os.path.join(config.model_data_folder, config.dataset.cve_id)
-    RESULTS_JSON_FILE_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, "results.json")
+    RESULTS_JSON_FILE_PATH = os.path.join(MODEL_CVE_DATA_FOLDER, data_format["files"]["results_path"])
     
     model_folder_path = config.model_data_folder.replace("data", "")[:-1]
-    MODEL_SELECT_RESULTS_PATH = os.path.join(model_folder_path, "select_results.json")
+    MODEL_SELECT_RESULTS_PATH = os.path.join(model_folder_path, data_format["files"]["select_results_path"])
 
     shutil.copyfile(RESULTS_JSON_FILE_PATH, RESULTS_PATH)
     shutil.copyfile(MODEL_SELECT_RESULTS_PATH, SELECT_RESULTS_PATH)
@@ -40,7 +45,7 @@ def main():
                     print(f"XFG: {XFG}; Expected: {label} Evaluated to: {output}")
                     incorr_cnt += 1
     
-    OUTPUT_TEXT_FILE_PATH = os.path.join(PROJ_PATH, "stats.txt")
+    OUTPUT_TEXT_FILE_PATH = os.path.join(PROJ_PATH, data_format["files"]["stats_path"])
 
     with open(OUTPUT_TEXT_FILE_PATH, "w") as f:
         f.write(f"Correct guesses: {corr_cnt} / {total_cnt}\nAccuracy: {(corr_cnt / (total_cnt)) * 100}%")
